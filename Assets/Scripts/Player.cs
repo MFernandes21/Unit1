@@ -11,7 +11,7 @@ public class Player : MonoBehaviour
     public LayerMask groundLayer;
     private void OnCollisionEnter2D(Collision2D other)
     {
-        Debug.Log("You've been stabbed");
+
     }
     Helper_Script helper;
 
@@ -27,19 +27,19 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        anim.SetBool("Walk", false);
-        anim.SetBool("Jump", false);
+        anim.SetBool("walk", false);
+        anim.SetBool("jump", false);
         if (Input.GetKey(KeyCode.LeftArrow) == true)
         {
-            print("User pressed left"); transform.position = new Vector2(transform.position.x - (2 * Time.deltaTime), transform.position.y);
-            anim.SetBool("Walk", true);
+            transform.position = new Vector2(transform.position.x - (2 * Time.deltaTime), transform.position.y);
+            anim.SetBool("walk", true);
             helper.FlipObject(true);
         }
 
         if (Input.GetKey(KeyCode.RightArrow) == true)
         {
-            print("User pressed right"); transform.position = new Vector2(transform.position.x + (2 * Time.deltaTime), transform.position.y);
-            anim.SetBool("Walk", true);
+            transform.position = new Vector2(transform.position.x + (2 * Time.deltaTime), transform.position.y);
+            anim.SetBool("walk", true);
             helper.FlipObject(false);
         }
 
@@ -47,7 +47,7 @@ public class Player : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.A))
         {
-            anim.SetTrigger("Attack");
+            anim.SetTrigger("attack");
         }
         Debug.Log(transform.position);
     }
@@ -55,13 +55,13 @@ public class Player : MonoBehaviour
 
     void DoJump()
     {
-        bool groundCheck = helper.DoRayCollisionCheck(1f, 0f);
+        bool groundCheck = helper.DoRayCollisionCheck(0f, 0f);
 
         if (Input.GetKeyDown(KeyCode.UpArrow) && groundCheck == true)
         {
-            anim.SetBool("Walk", false);
-            anim.SetBool("Jump", true);
-            rb.AddForce(new Vector3(0, 10f, 0), ForceMode2D.Impulse);
+            anim.SetBool("walk", false);
+            anim.SetBool("jump", true);
+            rb.AddForce(new Vector3(0, 5f, 0), ForceMode2D.Impulse);
         }
     }
 

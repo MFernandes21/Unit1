@@ -35,42 +35,15 @@ public class Helper_Script : MonoBehaviour
 
 
         if (hit.collider != null)
-        {
-            print("Player has collided with Ground layer");
-            hitColor = Color.green;
+        { 
             groundCheck = true;
         }
         else
         {
             groundCheck = false;
         }
-
-        Debug.DrawRay(transform.position + offset, -Vector2.up * rayLength, hitColor);
-
         return groundCheck;
-
-
     }
-    ////public void Patrol()
-    //{
-    //    Transform groundDetection;
-
-    //    transform.Translate(Vector2.right * speed * Time.deltaTime);
-
-    //    RaycastHit2D groundInfo = Physics2D.Raycast(groundDetection.position, Vector2.down, distance);
-    //    if(groundInfo.collider == false)
-    //    {
-    //        if(movingRight == true)
-    //        {
-    //            transform.eulerAngles = new Vector3(0, -180, 0);
-    //            movingRight = false;
-    //        }
-    //        else
-    //        {
-    //            transform.eulerAngles = new Vector3(0, 0, 0);
-    //            movingRight = true;
-    //        }
-    //    }
 
     void Start()
     {

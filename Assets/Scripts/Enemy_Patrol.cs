@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.Scripting.APIUpdating;
 
@@ -8,7 +7,7 @@ public class Enemy_Patrol : MonoBehaviour
 {
     // Start is called before the first frame update
     Helper_Script helper;
-    public float speed = 1f;
+    public float speed = 0.0f;
     public float distance = 1f;
 
 
@@ -30,21 +29,23 @@ public class Enemy_Patrol : MonoBehaviour
 
     void Move()
     {
-        transform.Translate(Vector2.right * speed * Time.deltaTime);
+        transform.Translate(Vector2.left * speed * Time.deltaTime);
     }
 
     void CheckEdges()
     {
         bool left, right;
 
-        left = helper.DoRayCollisionCheck(-0.2f, 0);
-        right = helper.DoRayCollisionCheck(0.2f, 0);
+        left = helper.DoRayCollisionCheck(-0.1f, 0);
+        right = helper.DoRayCollisionCheck(0.1f, 0);
 
         if( speed > 0 )
         {
             if( right == false )
             {
                 speed = -speed;
+                helper.FlipObject(true);
+                return;
             }
         }
         if(speed < 0 )
@@ -52,6 +53,7 @@ public class Enemy_Patrol : MonoBehaviour
             if( left == false )
             {
                 speed = 1f;
+                helper.FlipObject(false);
             }
         }
 
