@@ -22,7 +22,7 @@ public class Helper_Script : MonoBehaviour
     public bool DoRayCollisionCheck(float xoffs, float yoffs)
     {
         float rayLength = 0.5f;
-        bool groundCheck;
+        bool groundCheck = false;
 
         Vector3 offset = new Vector3(xoffs, yoffs, 0);
 
@@ -35,13 +35,11 @@ public class Helper_Script : MonoBehaviour
 
 
         if (hit.collider != null)
-        { 
+        {
+            hitColor = Color.green;
             groundCheck = true;
         }
-        else
-        {
-            groundCheck = false;
-        }
+        Debug.DrawRay(transform.position + offset, -Vector2.up * rayLength, hitColor);
         return groundCheck;
     }
 

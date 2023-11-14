@@ -7,7 +7,7 @@ public class Enemy_Patrol : MonoBehaviour
 {
     // Start is called before the first frame update
     Helper_Script helper;
-    public float speed = 0.0f;
+    public float speed = 1f;
     public float distance = 1f;
 
 
@@ -23,39 +23,47 @@ public class Enemy_Patrol : MonoBehaviour
     {
         CheckEdges();
         Move();
-
     }
 
 
     void Move()
     {
-        transform.Translate(Vector2.left * speed * Time.deltaTime);
+        transform.Translate(Vector2.right * speed * Time.deltaTime);
     }
 
     void CheckEdges()
     {
         bool left, right;
 
-        left = helper.DoRayCollisionCheck(-0.1f, 0);
-        right = helper.DoRayCollisionCheck(0.1f, 0);
+        left = helper.DoRayCollisionCheck(-0.5f, -0.5f);
+        right = helper.DoRayCollisionCheck(0.5f, -0.5f);
 
+
+        //checking for platform on right
         if( speed > 0 )
         {
-            if( right == false )
+            helper.FlipObject(true);
+
+            if ( right == false )
             {
                 speed = -speed;
-                helper.FlipObject(true);
-                return;
+                
             }
         }
         if(speed < 0 )
         {
-            if( left == false )
+            helper.FlipObject(false);
+            if ( left == false )
             {
-                speed = 1f;
-                helper.FlipObject(false);
+                speed = -speed;
+
             }
         }
+
+
+
+        
+
 
 
     }

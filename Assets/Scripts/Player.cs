@@ -49,7 +49,6 @@ public class Player : MonoBehaviour
         {
             anim.SetTrigger("attack");
         }
-        Debug.Log(transform.position);
     }
 
 
